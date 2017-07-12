@@ -212,6 +212,7 @@ static NSArray * AFPublicKeyTrustChainForServerTrust(SecTrustRef serverTrust) {
     }
 
     self.validatesDomainName = YES;
+    self.followRedirect = YES;
 
     return self;
 }
@@ -333,6 +334,7 @@ static NSArray * AFPublicKeyTrustChainForServerTrust(SecTrustRef serverTrust) {
     self.SSLPinningMode = [[decoder decodeObjectOfClass:[NSNumber class] forKey:NSStringFromSelector(@selector(SSLPinningMode))] unsignedIntegerValue];
     self.allowInvalidCertificates = [decoder decodeBoolForKey:NSStringFromSelector(@selector(allowInvalidCertificates))];
     self.validatesDomainName = [decoder decodeBoolForKey:NSStringFromSelector(@selector(validatesDomainName))];
+    self.followRedirect = [decoder decodeBoolForKey:NSStringFromSelector(@selector(followRedirect))];
     self.pinnedCertificates = [decoder decodeObjectOfClass:[NSArray class] forKey:NSStringFromSelector(@selector(pinnedCertificates))];
 
     return self;
@@ -342,6 +344,7 @@ static NSArray * AFPublicKeyTrustChainForServerTrust(SecTrustRef serverTrust) {
     [coder encodeObject:[NSNumber numberWithUnsignedInteger:self.SSLPinningMode] forKey:NSStringFromSelector(@selector(SSLPinningMode))];
     [coder encodeBool:self.allowInvalidCertificates forKey:NSStringFromSelector(@selector(allowInvalidCertificates))];
     [coder encodeBool:self.validatesDomainName forKey:NSStringFromSelector(@selector(validatesDomainName))];
+    [coder encodeBool:self.followRedirect forKey:NSStringFromSelector(@selector(followRedirect))];
     [coder encodeObject:self.pinnedCertificates forKey:NSStringFromSelector(@selector(pinnedCertificates))];
 }
 
@@ -352,6 +355,7 @@ static NSArray * AFPublicKeyTrustChainForServerTrust(SecTrustRef serverTrust) {
     securityPolicy.SSLPinningMode = self.SSLPinningMode;
     securityPolicy.allowInvalidCertificates = self.allowInvalidCertificates;
     securityPolicy.validatesDomainName = self.validatesDomainName;
+    securityPolicy.followRedirect = self.followRedirect;
     securityPolicy.pinnedCertificates = [self.pinnedCertificates copyWithZone:zone];
 
     return securityPolicy;

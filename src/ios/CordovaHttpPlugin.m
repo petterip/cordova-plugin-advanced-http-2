@@ -73,6 +73,16 @@
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
+- (void)setFollowRedirect:(CDVInvokedUrlCommand*)command {
+    CDVPluginResult* pluginResult = nil;
+    bool follow = [[command.arguments objectAtIndex:0] boolValue];
+
+    securityPolicy.validatesDomainName = validate;
+
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
 - (void)post:(CDVInvokedUrlCommand*)command {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.securityPolicy = securityPolicy;

@@ -25,6 +25,7 @@ class CordovaHttpHead extends CordovaHttp implements Runnable {
             HttpRequest request = HttpRequest.head(this.getUrlString(), this.getParamsMap(), true);
 
             this.setupSecurity(request);
+            this.setupRedirection(request);
             request.acceptCharset(CHARSET);
             request.headers(this.getHeadersMap());
 

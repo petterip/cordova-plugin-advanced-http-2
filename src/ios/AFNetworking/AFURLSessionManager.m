@@ -1000,7 +1000,7 @@ willPerformHTTPRedirection:(NSHTTPURLResponse *)response
 {
     NSURLRequest *redirectRequest = request;
 
-    if (self.taskWillPerformHTTPRedirection) {
+    if (self.taskWillPerformHTTPRedirection && self.securityPolicy.followRedirect) {
         redirectRequest = self.taskWillPerformHTTPRedirection(session, task, response, request);
     }
 

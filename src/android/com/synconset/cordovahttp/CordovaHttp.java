@@ -26,6 +26,7 @@ abstract class CordovaHttp {
     private static AtomicInteger connectionTimeout = new AtomicInteger(0);
     private static AtomicInteger readTimeout = new AtomicInteger(0);
     private static AtomicBoolean validateDomainName = new AtomicBoolean(true);
+    private static AtomicBoolean followRedirect = new AtomicBoolean(true);
 
     private String urlString;
     private JSONObject params;
@@ -72,6 +73,8 @@ abstract class CordovaHttp {
         validateDomainName.set(accept);
     }
 
+    public static void setFollowRedirect(boolean follow) { followRedirect.set(follow); }
+
     protected String getUrlString() {
         return this.urlString;
     }
@@ -117,6 +120,11 @@ abstract class CordovaHttp {
          request.connectTimeout(connectionTimeout.get());
          request.readTimeout(readTimeout.get());
  
+         return request;
+     }
+
+     protected HttpRequest setupRedirection(HttpRequest request) {
+         request.followRedirects(this.followRedirect.get());
          return request;
      }
 

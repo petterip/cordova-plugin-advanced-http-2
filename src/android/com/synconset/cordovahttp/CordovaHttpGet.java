@@ -28,6 +28,7 @@ class CordovaHttpGet extends CordovaHttp implements Runnable {
 
             this.setupSecurity(request);
             this.setupTimeouts(request);
+            this.setupRedirection(request);
             request.acceptCharset(CHARSET);
             request.headers(this.getHeadersMap());
 

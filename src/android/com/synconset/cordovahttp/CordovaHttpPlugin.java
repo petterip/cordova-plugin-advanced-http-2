@@ -75,6 +75,11 @@ public class CordovaHttpPlugin extends CordovaPlugin {
 
             CordovaHttp.validateDomainName(accept);
             callbackContext.success();
+        } else if (action.equals("setFollowRedirect")) {
+            boolean follow = args.getBoolean(0);
+
+            CordovaHttp.setFollowRedirect(follow);
+            callbackContext.success();
         } else if (action.equals("setTimeouts")) {
              int connectionTimeout = args.getInt(0);
              int readTimeout = args.getInt(1);
