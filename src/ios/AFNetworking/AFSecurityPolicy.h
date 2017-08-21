@@ -62,11 +62,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, assign) BOOL validatesDomainName;
 
-/**
- Whether to follow HTTP redirect responses, otherwise return them to the application level as errors. Defaults to 'YES'
- */
-@property (nonatomic, assign) BOOL followRedirect;
-
 ///-----------------------------------------
 /// @name Getting Certificates from the Bundle
 ///-----------------------------------------
